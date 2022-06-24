@@ -1,0 +1,15 @@
+from collections import deque
+def solution(priorities, location): 
+    answer = 0
+    check = sorted(priorities)
+    priorities = [(p, idx) for idx, p in enumerate(priorities)]
+    deq = deque(priorities)
+    while deq:
+        p, idx = deq.popleft()
+        if p == check[-1]:
+            answer += 1
+            check.pop()
+            if idx == location:
+                return answer 
+        else:
+            deq.append((p, idx))
