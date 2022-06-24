@@ -1,0 +1,13 @@
+def solution(clothes):
+    cloth_dict = {}
+    for name, _type in clothes:
+        if _type in cloth_dict:
+            cloth_dict[_type].append(name)
+        else:
+            cloth_dict[_type] = [name]
+    
+    answer = 1
+    for key in cloth_dict.keys():
+        answer *= (len(cloth_dict[key]) + 1)
+    answer -= 1
+    return answer
