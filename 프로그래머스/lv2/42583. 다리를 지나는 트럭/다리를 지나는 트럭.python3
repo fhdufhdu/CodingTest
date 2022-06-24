@@ -1,0 +1,23 @@
+from collections import deque
+
+
+def solution(bridge_length, weight, truck_weights):
+    answer = 0
+    truck_weight_deq = deque(truck_weights)
+    temp_weight = truck_weight_deq.popleft()
+    on_bridge = deque([(answer + bridge_length, temp_weight)])
+    remaining_weight = weight - temp_weight
+    answer += 1
+    while on_bridge:
+        arrive_time, truck_weight = on_bridge[0]
+        if arrive_time <= answer:
+            on_bridge.popleft()
+            remaining_weight += truck_weight
+        if truck_weight_deq:
+            temp_weight = truck_weight_deq[0]
+            if temp_weight <= remaining_weight:
+                on_bridge.append((answer + bridge_length, temp_weight))
+                remaining_weight -= temp_weight
+                truck_weight_deq.popleft()
+        answer += 1
+    return answer
