@@ -2,6 +2,7 @@ import heapq
 def solution(operations):
     min_heap = []
     max_heap = []
+    #삭제했는지 여부 확인
     removed = [False] * 10000000
     is_min = True
     for oper in operations:
@@ -16,6 +17,7 @@ def solution(operations):
             else:
                 data = heapq.heappop(min_heap)
             removed[data] = True
+        # 현재 최댓값, 최솟값이 삭제된 값이면 pop
         while max_heap:
             if not removed[-max_heap[0]]:
                 break
@@ -24,7 +26,7 @@ def solution(operations):
             if not removed[min_heap[0]]:
                 break
             heapq.heappop(min_heap) 
-            
+    # for문 끝나고 한번도 삭제됐는지 체크
     while max_heap:
         if not removed[-max_heap[0]]:
             break
@@ -33,6 +35,7 @@ def solution(operations):
         if not removed[min_heap[0]]:
             break
         heapq.heappop(min_heap)
+        
     if max_heap:
         answer = [-max_heap[0], min_heap[0]]
     else:
