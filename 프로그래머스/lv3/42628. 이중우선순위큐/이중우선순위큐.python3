@@ -26,7 +26,7 @@ def solution(operations):
             if not removed[min_heap[0]]:
                 break
             heapq.heappop(min_heap) 
-    # for문 끝나고 한번도 삭제됐는지 체크
+    # for문 끝나고 한번 더 삭제됐는지 체크
     while max_heap:
         if not removed[-max_heap[0]]:
             break
