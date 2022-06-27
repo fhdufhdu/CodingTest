@@ -1,0 +1,33 @@
+import heapq
+
+def solution(jobs):
+    #큐로 시작 시간별로 저장
+    #while문 안에서는 현재 시간 이전 요청을 pop해서 리스트에 담기
+    #그 리스트를 heapq에 담기
+    #heapq에서 맨처음 확인
+    #시간 확인 결과 출력 
+    start_heap = [(x, y) for x, y in jobs]
+    heapq.heapify(start_heap)
+    spend_heap = []
+    current_sec = 0
+    end_sec = 0
+    result = 0
+    cnt = 0
+    while start_heap or spend_heap:
+       	while start_heap:
+            start, spend = start_heap[0]
+            if start > current_sec:
+                break
+            heapq.heappush(spend_heap, (spend, start))
+            heapq.heappop(start_heap)
+        if spend_heap:
+            spend, start = spend_heap[0]
+            if start <= current_sec and current_sec >= end_sec:
+                heapq.heappop(spend_heap)
+                end_sec = current_sec + spend
+                result += end_sec - start
+                cnt += 1
+        current_sec += 1
+        
+    answer = int(result / cnt)
+    return answer
