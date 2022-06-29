@@ -1,0 +1,29 @@
+import copy
+from collections import Counter
+def solution(numbers):
+    nc = Counter(numbers)	
+    answer = 0
+    p = [False] * 10000000
+    p[0] = True
+    p[1] = True
+    
+    for i in range(10000000):
+        if p[i]: continue
+        n = i * i
+        while n < 10000000:
+            p[n] = True
+            n += i
+    for i in range(10000000):
+        if p[i]: continue
+        nlist = list(str(i))
+        c = copy.deepcopy(nc)
+        check = True
+        for j in nlist:
+            if c[j] <= 0:
+                check = False
+                break
+            c[j] -= 1
+        if check:
+            answer += 1
+
+    return answer
