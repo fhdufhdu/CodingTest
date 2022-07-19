@@ -1,5 +1,5 @@
 def solution(brown, yellow):
-    answer = []
+    answer = [] 
     for i in range(1, yellow + 1):
         j = int(yellow / i) 
         inner = i * j
