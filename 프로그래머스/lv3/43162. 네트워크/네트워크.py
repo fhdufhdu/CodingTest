@@ -2,7 +2,7 @@ def solution(n, computers):
     answer = 0
     g = [[] for i in range(n)]
     v = [False for i in range(n)]
-    for i in range(n):
+    for i in range(n): 
         for j in range(n):
             isConn = True if computers[i][j] == 1 else False
             if not isConn or i == j: continue
