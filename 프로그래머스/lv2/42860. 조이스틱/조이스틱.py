@@ -1,9 +1,9 @@
 def solution(name):
-    answer = 0
+    answer = 0 
     for n in list(name):
         answer += min(ord(n) - ord('A'), ord('Z') - ord(n) + 1) 
     move_cnt_list = []
-    length = len(name)
+    length = len(name) 
     for i in range(length):
        	end = i + 1
         while end < length and name[end] == 'A': end += 1
