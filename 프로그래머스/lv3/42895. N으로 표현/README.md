@@ -1,6 +1,6 @@
 # [level 3] N으로 표현 - 42895 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42895#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42895) 
 
 ### 성능 요약
 

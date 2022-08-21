@@ -1,4 +1,4 @@
-def get(N, cnt):
+def get(N, cnt): 
     result = 0
     for i in range(cnt):
        	result = result * 10 + N 
