@@ -1,6 +1,6 @@
 from collections import deque
 def solution(n, edge):
-    answer = 0 
+    answer = 0
     max_dist = 0
     g = [[] for _ in range(n+1)]
     v = [False for _ in range(n+1)]
