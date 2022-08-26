@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 9.98 MB, 시간: 0.03 ms
+메모리: 10 MB, 시간: 0.03 ms
 
 ### 구분
 
@@ -58,6 +58,10 @@
 <p>14분이 되었을 때, 첫 번째 심사대가 비고 5번째 사람이 심사를 받습니다.</p>
 
 <p>20분이 되었을 때, 두 번째 심사대가 비지만 6번째 사람이 그곳에서 심사를 받지 않고 1분을 더 기다린 후에 첫 번째 심사대에서 심사를 받으면 28분에 모든 사람의 심사가 끝납니다.</p>
+
+<h5>문제가 잘 안풀린다면😢</h5>
+
+<p>힌트가 필요한가요? [코딩테스트 연습 힌트 모음집]으로 오세요! → <a href="https://school.programmers.co.kr/learn/courses/14743?itm_content=lesson43238" target="_blank" rel="noopener">클릭</a></p>
 
 <p><a href="http://hsin.hr/coci/archive/2012_2013/contest3_tasks.pdf" target="_blank" rel="noopener">출처</a></p>
 

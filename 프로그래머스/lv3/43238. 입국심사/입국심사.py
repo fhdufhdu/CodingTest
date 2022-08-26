@@ -1,5 +1,5 @@
 def solution(n, times):
-    times = sorted(times) 
+    times = sorted(times)
     min_time = 1
     max_time = times[-1] * n
     answer = 1000000000000000
