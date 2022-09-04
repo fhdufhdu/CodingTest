@@ -1,5 +1,5 @@
 def solution(progresses, speeds): 
-    answer = []
+    answer = [] 
     progresses = list(reversed(progresses))
     speeds = list(reversed(speeds))
     
