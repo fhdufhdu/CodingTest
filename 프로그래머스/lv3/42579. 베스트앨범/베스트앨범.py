@@ -1,4 +1,4 @@
-def solution(genres, plays): 
+def solution(genres, plays):
     data = {}
     answer = []
     for i in range(len(genres)):
