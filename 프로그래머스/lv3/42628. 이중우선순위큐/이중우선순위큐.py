@@ -1,5 +1,5 @@
 import heapq 
-def solution(operations):
+def solution(operations): 
     min_heap = [] 
     max_heap = []
     #삭제했는지 여부 확인   
