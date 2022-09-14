@@ -3,7 +3,7 @@ def solution(n, costs):
     #최소신장트리?
     data = [i for i in range(101)]
     costs = sorted(costs, key=lambda x:x[2])
-    
+     
     def find(a):
         prev = []
        	while a != data[a]:
