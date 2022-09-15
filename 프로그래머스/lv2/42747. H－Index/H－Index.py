@@ -5,4 +5,5 @@ def solution(citations):
         if citations[i] >= (i + 1):
             if answer < (i + 1):
                 answer = (i + 1)
-    return answer
+                
+    return answer 
