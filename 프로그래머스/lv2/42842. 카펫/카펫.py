@@ -3,7 +3,7 @@ def solution(brown, yellow):
     for i in range(1, yellow + 1):
         j = int(yellow / i) 
         inner = i * j
-        outter = ((i + 2) * (j + 2)) - inner
+        outter = ((i + 2) * (j + 2)) - inner 
         if inner != yellow or outter != brown:
             continue
         if i > j:
