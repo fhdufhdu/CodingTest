@@ -5,7 +5,7 @@ class node:
         a = int(self.value + y.value)
         b = int(y.value + self.value)
         return a > b 
-def solution(numbers): 
+def solution(numbers):  
     numbers = [node(str(number)) for number in numbers]
     numbers = sorted(numbers)
     numbers = [number.value for number in numbers]
