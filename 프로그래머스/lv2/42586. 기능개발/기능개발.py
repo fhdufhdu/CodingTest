@@ -14,5 +14,5 @@ def solution(progresses, speeds):
                 continue
             break
        	if pop_count != 0:
-            answer.append(pop_count) 
+            answer.append(pop_count)  
     return answer
