@@ -1,6 +1,6 @@
 def solution(n, computers):
     answer = 0
-    g = [[] for i in range(n)] 
+    g = [[] for i in range(n)]
     v = [False for i in range(n)]
     for i in range(n): 
         for j in range(n):
