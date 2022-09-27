@@ -1,8 +1,8 @@
-def solution(genres, plays):
+def solution(genres, plays): 
     data = {}
     answer = []
     for i in range(len(genres)):
-        genre = genres[i]
+        genre = genres[i] 
         play = plays[i]
         
         if genre not in data:
