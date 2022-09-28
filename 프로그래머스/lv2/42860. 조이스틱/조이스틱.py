@@ -1,4 +1,4 @@
-def solution(name):
+def solution(name): 
     answer = 0 
     for n in list(name):
         answer += min(ord(n) - ord('A'), ord('Z') - ord(n) + 1) 
