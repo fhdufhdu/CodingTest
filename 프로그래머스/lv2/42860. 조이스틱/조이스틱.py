@@ -5,7 +5,7 @@ def solution(name):
     move_cnt_list = [] 
     length = len(name) 
     for i in range(length):
-       	end = i + 1
+       	end = i + 1 
         while end < length and name[end] == 'A': end += 1
         move_cnt_list.append(i * 2 + length - end)
         move_cnt_list.append((length - end) * 2 + i)
