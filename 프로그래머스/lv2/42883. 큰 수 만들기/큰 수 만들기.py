@@ -1,6 +1,6 @@
 from collections import Counter
 def solution(number, k):
-    answer = []
+    answer = [] 
     for i in range(0,len(number)):
         cur = int(number[i])
         while answer:
