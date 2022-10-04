@@ -3,7 +3,7 @@ def get(N, cnt):
     for i in range(cnt):
        	result = result * 10 + N 
     return result
-def solution(N, number):
+def solution(N, number): 
     create_list = [[N]]
     answer = 1
     if N == number:
