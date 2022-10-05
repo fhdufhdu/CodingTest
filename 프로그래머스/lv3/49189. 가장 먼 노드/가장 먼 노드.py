@@ -3,7 +3,7 @@ def solution(n, edge):
     answer = 0 
     max_dist = 0
     g = [[] for _ in range(n+1)]
-    v = [False for _ in range(n+1)]
+    v = [False for _ in range(n+1)] 
     for a, b in edge: 
        	g[a].append(b)
         g[b].append(a)
