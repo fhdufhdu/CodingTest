@@ -5,7 +5,7 @@ def solution(brown, yellow):
         inner = i * j 
         outter = ((i + 2) * (j + 2)) - inner 
         if inner != yellow or outter != brown:
-            continue  
+            continue
         if i > j:
             answer.append(i + 2)   
             answer.append(j + 2)
