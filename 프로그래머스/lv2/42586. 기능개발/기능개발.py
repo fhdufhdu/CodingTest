@@ -1,6 +1,6 @@
 def solution(progresses, speeds): 
     answer = [] 
-    progresses = list(reversed(progresses))
+    progresses = list(reversed(progresses)) 
     speeds = list(reversed(speeds))
     
     while progresses:
