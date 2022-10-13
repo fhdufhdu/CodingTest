@@ -5,7 +5,7 @@ def get(N, cnt):
     return result
 def solution(N, number): 
     create_list = [[N]]
-    answer = 1
+    answer = 1 
     if N == number:
         return answer
     while answer <= 8:
