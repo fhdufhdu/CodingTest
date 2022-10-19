@@ -1,10 +1,10 @@
 import heapq 
 def solution(operations): 
     min_heap = [] 
-    max_heap = []
+    max_heap = [] 
     #삭제했는지 여부 확인   
     removed = [False] * 10000000
-    is_min = True
+    is_min = True 
     for oper in operations:
         x, y = oper.split(' ')
         y = int(y)
