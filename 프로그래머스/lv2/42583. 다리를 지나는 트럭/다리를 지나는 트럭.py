@@ -8,7 +8,7 @@ def solution(bridge_length, weight, truck_weights):
     front = truck_w_d.popleft()
     on_bridge.append((front, time + bridge_length))
     left_weight = weight - front
-    time += 1
+    time += 1 
     while on_bridge:
        	on_front, left_time = on_bridge[0]
        	if left_time == time:
