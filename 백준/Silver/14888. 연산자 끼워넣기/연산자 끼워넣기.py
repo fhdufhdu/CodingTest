@@ -5,54 +5,34 @@ write = stdout.write
 
 n = int(read().rstrip())
 n_list = list(map(int, read().rsplit(' ')))
-o = list(map(int, read().rsplit(' ')))
-o_list = []
-
-for i in range(4):
-    for j in range(o[i]):
-        o_list.append(i)
-
-per_set = set()
+oper_cnt = list(map(int, read().rsplit(' ')))
 
 min = 10**10
 max = -10**10
-def permutation(history:list):
-    global min
-    global max
-    if len(history) == n - 1:
-        history_str = ' '.join(list(map(str, history)))
-        if history_str in per_set:
-            return
-        # print(len(per_set))
-        per_set.add(history_str)
-
-        result = n_list[0]
-        for i in range(n-1):
-            if history[i] == 0:
-                result += n_list[i+1]
-            elif history[i] == 1:
-                result -= n_list[i+1]
-            elif history[i] == 2:
-                result = int(result * n_list[i+1])
-            else:
-                result = int(result / n_list[i+1])
+def recur(depth:int, result:int):
+    if depth >= n - 1:
+        global min
+        global max
         if result < min:
             min = result
         if result > max:
             max = result
-
         return
 
-    for i in range(n - 1):
-        if v[i]: continue
-        v[i] = True
-        permutation(history + [o_list[i]])
-        v[i] = False
+    
+    for j in range(4):
+        if oper_cnt[j] <= 0: continue
+        oper_cnt[j] -= 1
+        if j == 0:
+            recur(depth+1, result + n_list[depth+1])
+        elif j == 1:
+            recur(depth+1, result - n_list[depth+1])
+        elif j == 2:
+            recur(depth+1, int(result * n_list[depth+1]))
+        else:
+            recur(depth+1, int(result / n_list[depth+1]))
+        oper_cnt[j] += 1
 
-for i in range(n-1):
-    v = [False] * (n-1)
-    v[i] = True
-    permutation([o_list[i]])
-    v[i] = False
+recur(0, n_list[0])
 
-write(f'{max}\n{min}') 
+write(f'{max}\n{min}')
