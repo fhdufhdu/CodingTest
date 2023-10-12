@@ -1,28 +1,38 @@
 def solution(cap, n, deliveries, pickups):
     answer = 0
-    dd = deliveries
-    pp = pickups
+    
+    dd = [(i, d) for i, d in enumerate(deliveries)]
+    pp = [(i, p) for i, p in enumerate(pickups)]
     
     while dd or pp:
-        while dd and dd[-1] == 0: dd.pop()
-        while pp and pp[-1] == 0: pp.pop()
+        max_idx = -1
         
-        answer += 2*max(len(dd), len(pp))
-        curr_d_cap = 0
+        curr_cap = 0
         while dd:
-            d = dd.pop()
-            if d + curr_d_cap <= cap:
-                curr_d_cap += d
-            else:
-                dd.append(curr_d_cap + d - cap)
-                break
+            i, d = dd[-1]
+            if d == 0:
+                dd.pop()
+                continue
+            max_idx = max(max_idx, i) 
             
-        curr_p_cap = 0
+            if curr_cap + d >= cap:
+                dd[-1] = (i, d - (cap - curr_cap))
+                break
+            curr_cap += d
+            dd.pop()
+            
+        curr_cap = 0
         while pp:
-            p = pp.pop()
-            if p + curr_p_cap <= cap:
-                curr_p_cap += p
-            else:
-                pp.append(curr_p_cap + p - cap)
-                break     
+            i, p = pp[-1]
+            if p == 0:
+                pp.pop()
+                continue
+            max_idx = max(max_idx, i) 
+            
+            if curr_cap + p >= cap:
+                pp[-1] = (i, p - (cap - curr_cap))
+                break
+            curr_cap += p
+            pp.pop()
+        answer += 2*(max_idx + 1)
     return answer
