@@ -5,6 +5,8 @@ def solution(queue1, queue2):
     q1s = sum(queue1)
     q2s = sum(queue2)
     
+    max_count = len(queue1) * 3
+    
     q1 = deque(queue1)
     q2 = deque(queue2)
     while q1s != q2s:
@@ -19,6 +21,6 @@ def solution(queue1, queue2):
             q1s += n
             q2s -= n
         answer += 1
-        if answer > 900000:
+        if answer > max_count:
             return -1
     return answer
