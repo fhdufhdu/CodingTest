@@ -1,36 +1,53 @@
-from itertools import product
-
-def solution(n, info):
-    answer = [-1]
-    info.reverse()
-    
-    win_results = product((True, False), repeat=11)
-    max_sub_score = -1
-    
-    for win_result in win_results:
-        ryan = [info[i] + 1 if win_result[i] else 0 for i in range(11)] 
-       	ryan_arrow_sum = sum(ryan)
+from collections import deque
+def compare(al, bl):
+    if not al:
+        return bl
         
-        if ryan_arrow_sum <= n:
-            ryan[0] = n - ryan_arrow_sum
-            
-            ryan_score = sum(i for i in range(11) if win_result[i])
-            apeach_score = sum(i for i in range(11) if not win_result[i] and info[i] != 0)
-            
-            if ryan_score <= apeach_score:
+    for i in range(len(al) - 1, -1, -1):
+        if al[i] < bl[i]:
+            return bl
+        elif al[i] > bl[i]:
+            return al
+    return bl
+def solution(n, info):
+    answer = []
+    
+    queue = deque([(-1, [], n)]) 
+
+    histories = []
+    while queue:
+        prev_idx, prev_history, prev_remain_arrow = queue.pop()
+        
+        curr_idx = prev_idx + 1
+        if curr_idx >= 11:
+            prev_history[10] += prev_remain_arrow
+            histories.append(prev_history)
+            continue
+        queue.append((curr_idx, prev_history+[0], prev_remain_arrow))
+        if prev_remain_arrow-info[curr_idx] >= 0:
+            queue.append((curr_idx, prev_history+[info[curr_idx]], prev_remain_arrow-info[curr_idx]))
+        if prev_remain_arrow-(info[curr_idx]+1) >= 0:
+            queue.append((curr_idx, prev_history+[info[curr_idx]+1], prev_remain_arrow-(info[curr_idx]+1)))
+        
+    total_max = 0 
+    for history in histories:
+        appeach_total = 0
+        ryan_total = 0
+        for i in range(11):
+            if info[i] == 0 and history[i] == 0:
                 continue
-            
-            sub_score = ryan_score - apeach_score
-            if max_sub_score < sub_score:
-                max_sub_score = sub_score
-                answer = ryan
-            elif max_sub_score == sub_score:
-                for i in range(11):
-                    if ryan[i] > answer[i]:
-                        answer = ryan 
-                        break
-                    elif ryan[i] < answer[i]:
-                        break
-                
-    answer.reverse()
+            if info[i] < history[i]:
+                ryan_total += 10 - i
+            else:
+                appeach_total += 10 - i
+        
+        diff_total = ryan_total - appeach_total
+        if diff_total >= total_max:
+            if diff_total == total_max:
+                answer = compare(answer, history)
+            else:
+                answer = history
+            total_max = diff_total
+    if not answer or total_max == 0:
+        answer = [-1]
     return answer
