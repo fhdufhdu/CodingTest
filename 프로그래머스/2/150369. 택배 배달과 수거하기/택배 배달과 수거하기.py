@@ -1,29 +1,25 @@
 def solution(cap, n, deliveries, pickups):
     answer = 0
-    
-    dv = deliveries
-    pu = pickups 
-    
-    while dv or pu:
-        while dv and dv[-1] == 0: dv.pop()
-        while pu and pu[-1] == 0: pu.pop()
+    while deliveries or pickups:
+        while deliveries and deliveries[-1] == 0: deliveries.pop()
+        while pickups and pickups[-1] == 0: pickups.pop()
         
-        answer += 2 * max(len(dv), len(pu))
+       	
+        answer += 2 * max(len(deliveries), len(pickups))
         
-        curr_cap = 0
-        while dv:
-            d = dv.pop()
-            if curr_cap + d > cap:
-                dv.append(curr_cap + d - cap)
+        total_cap = 0
+        while deliveries:
+            curr_cap = deliveries.pop()
+            if total_cap + curr_cap > cap:
+                deliveries.append(curr_cap - (cap - total_cap))
                 break
-            curr_cap += d
+            total_cap += curr_cap
             
-        curr_cap = 0
-        while pu:
-            p = pu.pop()
-            if curr_cap + p > cap:
-                pu.append(curr_cap + p - cap)
+        total_cap = 0
+        while pickups:
+            curr_cap = pickups.pop()
+            if total_cap + curr_cap > cap:
+                pickups.append(curr_cap - (cap - total_cap))
                 break
-            curr_cap += p
-            
+            total_cap += curr_cap
     return answer
