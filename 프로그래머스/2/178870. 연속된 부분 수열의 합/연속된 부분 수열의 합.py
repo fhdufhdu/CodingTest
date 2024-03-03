@@ -1,31 +1,21 @@
-from collections import deque
-
 def solution(sequence, k):
+    start_idx = 0
+    end_idx = 0
+    
+    total = sequence[0]
     answer = []
-    
     seq_len = len(sequence)
-    s_idx = 0
-    e_idx = -1
-    
-    total = 0
-    result = []
     while True:
-        if total < k and e_idx < seq_len:
-            e_idx += 1
-            if e_idx < seq_len:
-                total += sequence[e_idx]
-        elif total == k:
-            result.append((s_idx, e_idx))
-            e_idx += 1
-            if e_idx < seq_len:
-                total += sequence[e_idx]
-        elif s_idx < seq_len:
-            total -= sequence[s_idx]
-            s_idx += 1
-        
-        if s_idx >= seq_len or e_idx >= seq_len:
+        if total < k and end_idx < seq_len - 1:
+            end_idx += 1
+            total += sequence[end_idx]
+        else:
+            if total == k:
+                answer.append([start_idx, end_idx])
+            total -= sequence[start_idx]
+            start_idx += 1
+        if start_idx > end_idx:
             break
-            
-    result = sorted(result, key=lambda x:(x[1]-x[0], x[0], x[1]))
-    answer = result[0]
-    return answer
+    
+    answer = sorted(answer, key=lambda x: (x[1]-x[0], x[0], x[1]))
+    return answer[0]
