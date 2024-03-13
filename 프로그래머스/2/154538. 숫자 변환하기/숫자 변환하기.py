@@ -1,6 +1,9 @@
 from collections import deque, defaultdict
 
 def solution(x, y, n):
+    """
+    bfs로 풀 되, visit을 정하는 게 매우 중요한 문제였음.
+    """
     answer = int(10e9)
     
     queue = deque([(x, 0)])
