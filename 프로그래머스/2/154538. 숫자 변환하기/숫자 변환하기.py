@@ -2,14 +2,15 @@ from collections import deque, defaultdict
 
 def solution(x, y, n):
     """
-    bfs로 풀 되, visit을 정하는 게 매우 중요한 문제였음.
+    bfs로 풀어야 함.
+    제일 중요한건 visit 조건 정하기임.
     """
     answer = int(10e9)
     
     queue = deque([(x, 0)])
 
-    visit = defaultdict(lambda: False)
-    visit[f"{x}_{0}"] = True
+    visit = defaultdict(lambda: int(10e9))
+    visit[x] = 0
     
     while queue:
         curr_x, count = queue.popleft()
@@ -28,9 +29,9 @@ def solution(x, y, n):
             else:
                 next_x += n
             if next_x > y: continue
-            if visit[f"{next_x}_{next_count}"]: continue
-            queue.append((next_x, count+1))
-            visit[f"{next_x}_{next_count}"] = True
+            if visit[next_x] <= next_count: continue
+            queue.append((next_x, next_count))
+            visit[next_x] = next_count
             
     if answer == int(10e9):
         return -1
