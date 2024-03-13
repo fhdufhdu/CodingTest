@@ -1,95 +1,66 @@
 from collections import deque
-
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-
-
-def s_l_bfs(queue, visited, board, n, m):
-
-    while queue:
-        cur_x, cur_y, dis = queue.popleft()
-        visited[cur_x][cur_y] = True
-
-        if board[cur_x][cur_y] == 'L':
-            return dis
-
-        for i in range(4):
-            nx = cur_x + dx[i]
-            ny = cur_y + dy[i]
-
-            if 0 <= nx < n and 0 <= ny < m:
-                if not visited[nx][ny] and board[nx][ny] != 'X':
-                    queue.append((nx, ny, dis + 1))
-                    visited[nx][ny] = True
-
-    return -1
-
-
-def l_e_bfs(queue, visited, board, n, m):
-
-    while queue:
-        cur_x, cur_y, dis = queue.popleft()
-        visited[cur_x][cur_y] = True
-
-        # 레버를 당겼을 때만 탈출이니까 solution() 에서 분기문으로 처리해둔 상태
-        if board[cur_x][cur_y] == 'E':
-            return dis
-
-        for i in range(4):
-            nx = cur_x + dx[i]
-            ny = cur_y + dy[i]
-
-            if 0 <= nx < n and 0 <= ny < m:
-                if not visited[nx][ny] and board[nx][ny] != 'X':
-                    queue.append((nx, ny, dis + 1))
-                    visited[nx][ny] = True
-
-    return -1
-
-
 def solution(maps):
+    maps = list(map(lambda x:list(x), maps))
     n = len(maps)
     m = len(maps[0])
-    queue = deque()
-    visited = [[False for _ in range(m)] for _ in range(n)]
-    board = [['' for _ in range(m)] for _ in range(n)]
-    start_x = start_y = lever_x = lever_y = 0
-
+    
+    s = None
+    l = None
+    e = None
     for i in range(n):
         for j in range(m):
-            split_map_line = maps[i][j:j + 1]
-            board[i][j] = split_map_line
-
-            # start, lever 위치 저장
-            if split_map_line == 'S':
-                start_x = i
-                start_y = j
-
-            elif split_map_line == 'L':
-                lever_x = i
-                lever_y = j
-
-    # Start 좌표 Queue 에 채워넣기
-    queue.append((start_x, start_y, 0))
-
-    # Start ~ Lever 까지의 최소 거리
-    start_lever_dis = s_l_bfs(queue, visited, board, n, m)
-    print(f'start_lever_dis = {start_lever_dis}')
-
-    if start_lever_dis != -1: # 레버를 당긴 상태
-        # visited 초기화
-        # Lever 좌표 Queue 에 채워넣기
-        queue = deque()
-        queue.append((lever_x, lever_y, 0))
-        visited = [[False for _ in range(m)] for _ in range(n)]
-
-        # Lever ~ Exit 까지의 최소 거리
-        lever_exit_dis = l_e_bfs(queue, visited, board, n, m)
-        print(f'lever_exit_dis = {lever_exit_dis}')
-
-        if lever_exit_dis != -1: # 탈출이 가능하다면,
-            return start_lever_dis + lever_exit_dis
+            if maps[i][j] == 'S':
+                s = (i, j)
+                maps[i][j] = 'O'
+            elif maps[i][j] == 'L':
+                l = (i, j)
+                maps[i][j] = 'O'
+            elif maps[i][j] == 'E':
+                e = (i, j)
+                maps[i][j] = 'O'
+    dxy = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+    
+    queue = deque([(s[0], s[1], 0)])
+    v = [[False] * m for _ in range(n)]
+    v[s[0]][s[1]] = True
+   	
+    s_to_l = -1
+    while queue:
+        x, y, count = queue.popleft()
+        if (x, y) == l:
+            s_to_l = count
+            break
+        
+        for dx, dy in dxy:
+            nx, ny = x+dx, y+dy
+            if not(0<=nx<n and 0<=ny<m): continue
+            if maps[nx][ny] == 'X': continue
+            if v[nx][ny]: continue
+            
+            queue.append((nx, ny, count+1))
+            v[nx][ny] = True
+            
+    queue = deque([(l[0], l[1], 0)])
+    v = [[False] * m for _ in range(n)]
+    v[l[0]][l[1]] = True
+   	
+    l_to_e = -1
+    while queue:
+        x, y, count = queue.popleft()
+        if (x, y) == e:
+            l_to_e = count
+            break
+        
+        for dx, dy in dxy:
+            nx, ny = x+dx, y+dy
+            if not(0<=nx<n and 0<=ny<m): continue
+            if maps[nx][ny] == 'X': continue
+            if v[nx][ny]: continue
+            
+            queue.append((nx, ny, count+1))
+            v[nx][ny] = True
+    
+    if s_to_l == -1 or l_to_e == -1:
         return -1
-
-    else: # 레버를 당기지 못했다면,
-        return -1
+    answer = s_to_l + l_to_e
+    return answer
