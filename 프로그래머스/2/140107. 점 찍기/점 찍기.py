@@ -18,7 +18,7 @@ def solution(k, d):
         temp = (-(i_**2) + d ** 2) ** 0.5
         if isinstance(temp, complex):
             break 
-        a = temp // k + 1
+        a = (temp // k) + 1
         answer += a
         if a <= 0: break
         i += 1
