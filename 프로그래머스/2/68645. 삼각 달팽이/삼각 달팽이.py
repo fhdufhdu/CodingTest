@@ -4,6 +4,8 @@ def convert_idx(i, j):
 def solution(n):
     max_length = (n*(n+1)) // 2
     data = [[0]*(i+1) for i in range(n)]
+    
+    # 방향 지정하는 것이 매우 중요함
     d = [(1, 0), (0, 1), (-1, -1)]
     
     stack = [(0, 0, 0, 1)]
