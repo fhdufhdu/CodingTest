@@ -21,4 +21,5 @@ def solution(w,h):
     answer = total - ((w + h - 1) * gcd_value)
     return answer
 
+# https://school.programmers.co.kr/questions/64956 <- 참고해서 문제 풀었음
 
