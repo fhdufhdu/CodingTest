@@ -1,11 +1,10 @@
 from itertools import product
-
 def solution(word):
     answer = 0
-    words = []
-    for i in range(1, 6):
-    	words += (list(map(lambda x:"".join(x), (product(list('AEIOU'), repeat=i)))))
-    words = sorted(words)
-    idx2word = {w: idx+1 for idx, w in enumerate(words)}
-    answer = idx2word[word]
+    _dict = []
+    for i in range(5):
+    	_dict.extend(list(product(list("AEIOU"), repeat=i+1)))
+    _dict = list(map(lambda x:"".join(x), sorted(_dict)))
+    __dict = {_dict[i]:i+1 for i in range(len(_dict))}
+    answer = __dict[word]
     return answer
