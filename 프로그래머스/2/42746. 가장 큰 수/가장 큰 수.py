@@ -1,16 +1,12 @@
 class Node:
     def __init__(self, number):
         self.number = number
-    def __lt__(self, node):
-        a = int(f"{self.number}{node.number}")
-        b = int(f"{node.number}{self.number}")
-        return a > b
-       	 
+    def __lt__(self, other):
+        return self.number + other.number > other.number + self.number
 def solution(numbers):
-    numbers = list(map(lambda x: Node(x), numbers))
-    numbers = sorted(numbers)
-    answer = "".join(list(map(lambda x: str(x.number), numbers)))
-    
-    if answer[0] == '0':
-        return '0'
+    answer = ''
+    numbers = list(map(lambda x:Node(str(x)),numbers))
+    numbers = list(map(lambda x:x.number, sorted(numbers)))
+    answer = "".join(numbers)
+    if answer[0] == "0": return "0"
     return answer
