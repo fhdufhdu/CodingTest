@@ -1,20 +1,17 @@
-def path(y, n, board):
-    if y == n:
+def nqueen(board, curr_row, size):
+    if curr_row == size:
         return 1
     result = 0
-    for i in range(n):
-        av = True
-        for j in range(y):
-            if (board[j] == i) or (abs(i - board[j]) == abs(y - j)):
-                av = False
-                break
-        if av:
-            board[y] = i
-            result += path(y+1, n, board)
+    for col in range(size):
+        check = True
+        for prev_row in range(curr_row):
+            if board[prev_row] == col: check = False; break;
+            if abs(prev_row - curr_row) == abs(board[prev_row] - col): check = False; break;
+        if check:
+            board[curr_row] = col
+            result += nqueen(board, curr_row + 1, size)
     return result
-				
+    
 def solution(n):
-    answer = 0
-    board = [-1] * n
-    answer = path(0, n, board)
+    answer = nqueen([0]*n, 0, n)
     return answer
